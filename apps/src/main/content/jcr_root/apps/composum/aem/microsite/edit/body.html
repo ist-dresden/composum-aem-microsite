@@ -1,0 +1,43 @@
+<sly data-sly-use.page="com.composum.aem.microsite.model.MicrositePage"
+     data-sly-use.clientlib="core/wcm/components/commons/v1/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.css @ categories='composum.aem.microsite.page'}"></sly>
+    <div class="composum-aem-microsite-page_data">
+        <table class="table">
+            <tr>
+                <th colspan="2">${page.title || 'Embedded Microsite'}</th>
+            </tr>
+            <tr>
+                <td>Last Import</td>
+                <td>${page.lastImportTime}</td>
+            </tr>
+            <tr>
+                <td>Index Path</td>
+                <td>${page.properties.indexPath}</td>
+            </tr>
+            <tr>
+                <td>Archive File</td>
+                <td><a href="${page.archiveFileUri}" download="${page.fileName}">${page.fileName}</a></td>
+            </tr>
+            <!--/* tr>
+                <td>file size</td>
+                <td>${page.properties.lastImportSize}</td>
+            </tr */-->
+            <!--/* tr>
+                <td colspan="2">
+                    <form class="composum-aem-microsite-page_upload-form"
+                          action="${page.contentUploadUrl}" method="POST" enctype="multipart/form-data">
+                        <input class="composum-aem-microsite-page_fileupload form-control"
+                               name="archive" type="file" placeholder="ZIP archive"/>
+                        <button class="composum-aem-microsite-page_upload-submit btn btn-primary"
+                                type="submit">Upload
+                        </button>
+                    </form>
+                </td>
+            </tr */-->
+        </table>
+    </div>
+    <div class="composum-aem-microsite-page_preview">
+        <iframe class="composum-aem-microsite-page_frame" width="100%" src="${page.embeddedPreviewUrl}"></iframe>
+        <div class="composum-aem-microsite-page_foreground"></div>
+    </div>
+</sly>
