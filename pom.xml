@@ -62,6 +62,10 @@
             <id>istrepo</id>
             <url>https://repo.ist-software.com/repository/maven-snapshots</url>
         </snapshotRepository>
+        <site>
+            <id>site</id>
+            <url>https://ist-dresden.github.io/composum-aem-microsite/</url>
+        </site>
     </distributionManagement>
 
     <modules>
@@ -379,6 +383,21 @@
                         <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
+                </plugin>
+
+                <!-- === For generating the site === -->
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.12.1</version>
+                </plugin>
+
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.4.5</version>
                 </plugin>
 
             </plugins>
