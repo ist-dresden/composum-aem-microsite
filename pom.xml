@@ -113,8 +113,11 @@
                         </executions>
                         <configuration>
                             <gpgArguments>
+                                <!-- necessary for avoiding password prompt in Github Action -->
+                                <arg>--batch</arg>
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
+                                <arg>-v</arg>
                             </gpgArguments>
                         </configuration>
                     </plugin>
