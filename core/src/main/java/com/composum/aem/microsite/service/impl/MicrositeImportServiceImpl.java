@@ -211,9 +211,10 @@ public class MicrositeImportServiceImpl implements MicrositeImportService, Micro
         MicrositeImportRequest importRequest = new MicrositeImportRequest(status, pageContent);
         if (config.enabled()) {
             try {
-                String rootPageName = Objects.requireNonNull(pageContent.getParent()).getName();
-                MicrositeSourceTransformer sourceTransformer = new MicrositeSourceTransformer(
-                        rootPageName + PAGE_EXTENSION, rootPageName + PAGE_CONTENT_URL_SEGMENT);
+                final String pagePath = Objects.requireNonNull(pageContent.getParent()).getPath();
+                final String pageName = Objects.requireNonNull(pageContent.getParent()).getName();
+                MicrositeSourceTransformer sourceTransformer =
+                        new MicrositeSourceTransformer(pagePath + PAGE_EXTENSION, pageName + PAGE_EXTENSION);
                 importRequest.startImport(sourceTransformer, zipStream);
                 importProvider.clearContent(pageContent);
                 ZipEntry zipEntry;

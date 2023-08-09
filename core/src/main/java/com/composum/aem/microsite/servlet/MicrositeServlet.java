@@ -77,19 +77,19 @@ public class MicrositeServlet extends SlingAllMethodsServlet {
     @Override
     public void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response)
             throws IOException, ServletException {
-        RequestPathInfo pathInfo = request.getRequestPathInfo();
-        List<String> selectors = Arrays.asList(pathInfo.getSelectors());
+        final RequestPathInfo pathInfo = request.getRequestPathInfo();
+        final List<String> selectors = Arrays.asList(pathInfo.getSelectors());
+        final boolean embedded = selectors.contains(SELECTOR_EMBEDDED);
         String suffix = xssApi.getValidHref(pathInfo.getSuffix());
-        boolean embedded = selectors.contains(SELECTOR_EMBEDDED);
         if (!embedded && WCMMode.fromRequest(request) == WCMMode.EDIT && StringUtils.isBlank(suffix)) {
             forwardForEditing(request, response);
         } else {
+            final Resource pageContent = request.getResource();
+            final ValueMap pageProperties = pageContent.getValueMap();
+            final String indexPath = pageProperties.get(PN_INDEX_PATH, "");
             if (StringUtils.isNotBlank(suffix)) {
                 suffix = suffix.substring(1); /* skip leading '/' */
             }
-            Resource pageContent = request.getResource();
-            ValueMap pageProperties = pageContent.getValueMap();
-            String indexPath = pageProperties.get(PN_INDEX_PATH, "");
             Resource contentResource = null;
             if (StringUtils.isNotBlank(suffix)) {
                 contentResource = pageContent.getChild(suffix);

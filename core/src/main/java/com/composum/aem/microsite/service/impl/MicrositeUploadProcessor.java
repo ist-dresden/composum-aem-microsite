@@ -68,7 +68,7 @@ public class MicrositeUploadProcessor implements SlingPostProcessor {
 
     @Override
     public void process(SlingHttpServletRequest request, List<Modification> list) {
-        for (Modification modification : list) {
+        for (final Modification modification : list) {
             if (!processChange(request, modification, ModificationType.MODIFY, (matcher, content) -> {
                 final Resource node = content.getResourceResolver().getResource(matcher.group("path"));
                 final String srcName;

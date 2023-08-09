@@ -1,9 +1,13 @@
 package com.composum.aem.microsite.strategy;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.composum.aem.microsite.MicrositeConstants.PLACEHOLDER_PAGE;
+import static com.composum.aem.microsite.MicrositeConstants.PLACEHOLDER_PATH;
 
 /**
  * this transformer is rewriting relative URLs in the source files of an imported ZIP site
@@ -21,32 +25,35 @@ public class MicrositeSourceTransformer {
             .compile("(?<start><\\s*(img|audio|video|source|script|frame)\\s+([^>]+\\s+)?src\\s*=\\s*[\"'])(?<change>[^\"']+)(?<end>[\"'][^>]*>)");
     // HTML: <div ... data-file="path/to/file.ext" ... >
     public static final Pattern PTN_HTML_DATA = Pattern
-            .compile("(?<start><\\s*(div)\\s+([^>]+\\s+)?data-(path|file)\\s*=\\s*[\"'])(?<change>[^\"']+)(?<end>[\"'][^>]*>)");
+            .compile("(?<start><\\s*(div)\\s+([^>]+\\s+)?data-(path|file|resource)(-[a-zA-Z0-9_-])?\\s*=\\s*[\"'])(?<change>[^\"']+)(?<end>[\"'][^>]*>)");
     // JS,JSON: "some/${path}/to/file.ext" or './to/file.ext'
     public static final Pattern PTN_PATH_VAR = Pattern
-            .compile("(?<start>[\"'])(?<change>([^$\"']*\\$\\{path}|\\./)[^\"']*)(?<end>[\"'])");
+            .compile("(?<start>[\"'])(?<change>([^$\"']*\\$\\{(" + PLACEHOLDER_PAGE + "|" + PLACEHOLDER_PATH + ")}|\\./)[^\"']*)(?<end>[\"'])");
 
     /**
      * decide between external or absolute and relative URLs
      */
     public static final Pattern PTN_EXT_ABS_URL = Pattern
-            .compile("^((?<scheme>https?):(//(?<host>[^:/]+)(:(?<port>\\d+))?)?)?(?<path>/.*)$");
+            .compile("^((?<scheme>https?):)?//((?<host>[^:/]+)(:(?<port>\\d+))?)?(?<path>/.*)$");
 
     /**
-     * the base URL for all relative URLs in the source
+     * the base URL for all relative URIs in the source
      */
-    protected final String htmlRoot; // the HTML root should reference the landing page as proxy
-    protected final String fileRoot; // all resource files should be referenced directly (via '/_jcr_content')
+    protected final String relativeRoot; // the relative root starts with the proxy page itself
+
+    /**
+     * the base URL for all absolure URIs in the source
+     */
+    protected final String absoluteRoot;
 
     /**
      * constructor with the URL (path) of the landing page as general base for all sources
      *
-     * @param htmlRoot the base URL for all relative URLs to HTML targets in the source
-     * @param fileRoot the base URL for all relative URLs to non HTML targets in the source
+     * @param relativeRoot the base URL for all relative URLs to HTML targets in the source
      */
-    public MicrositeSourceTransformer(String htmlRoot, String fileRoot) {
-        this.htmlRoot = htmlRoot;
-        this.fileRoot = fileRoot;
+    public MicrositeSourceTransformer(@NotNull final String absoluteRoot, @NotNull final String relativeRoot) {
+        this.absoluteRoot = absoluteRoot;
+        this.relativeRoot = relativeRoot;
     }
 
     /**
@@ -62,11 +69,11 @@ public class MicrositeSourceTransformer {
         Matcher external = PTN_EXT_ABS_URL.matcher(url);
         if (!external.matches()) { // ignore external URLs
             String targetExt = StringUtils.substringAfterLast(url, ".");
-            boolean isHtmlTarget = "html".equalsIgnoreCase(targetExt);
-            final String rootUrl = isHtmlTarget ? htmlRoot : fileRoot; // use different paths for HTML links and resource files
-            final String relPath = rootUrl + relBase;
-            if (url.contains("${path}")) {
-                transformedUrl = new StringBuilder(url.replaceFirst("\\$\\{path}", relPath));
+            final String relPath = relativeRoot + relBase;
+            if (url.contains("${" + PLACEHOLDER_PAGE + "}")) {
+                transformedUrl = new StringBuilder(url.replaceFirst("\\$\\{" + PLACEHOLDER_PAGE + "}", relPath));
+            } else if (url.contains("${" + PLACEHOLDER_PATH + "}")) {
+                transformedUrl = new StringBuilder(url.replaceFirst("\\$\\{" + PLACEHOLDER_PATH + "}", absoluteRoot));
             } else if (url.startsWith("./")) {
                 transformedUrl = new StringBuilder(relPath + url.substring(1));
             } else {
@@ -74,13 +81,13 @@ public class MicrositeSourceTransformer {
             }
             transformedUrl = new StringBuilder(transformedUrl.toString().replaceAll("/\\./", "/")); // remove '/.' path segments
             transformedUrl = new StringBuilder(transformedUrl.toString().replaceAll("/[^/]+/\\.\\./", "/"));
-            if (htmlContext && !rootUrl.startsWith("/")) {
-                if (transformedUrl.toString().equals(htmlRoot + (indexPath.startsWith("/") ? indexPath : "/" + indexPath))) {
-                    transformedUrl = new StringBuilder(htmlRoot);
+            if (htmlContext) {
+                if (transformedUrl.toString().equals(relativeRoot + (indexPath.startsWith("/") ? indexPath : "/" + indexPath))) {
+                    transformedUrl = new StringBuilder(relativeRoot);
                 }
                 if (!isIndex) {
                     // let's start with the folder of the landing page if a content file - not the index - references something
-                    transformedUrl.insert(0, StringUtils.repeat("../", StringUtils.countMatches(htmlRoot + relBase, "/") + 1));
+                    transformedUrl.insert(0, StringUtils.repeat("../", StringUtils.countMatches(relativeRoot + relBase, "/") + 1));
                 }
             }
         }

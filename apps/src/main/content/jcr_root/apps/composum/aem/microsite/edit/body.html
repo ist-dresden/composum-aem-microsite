@@ -16,7 +16,9 @@
             </tr>
             <tr>
                 <td>Archive File</td>
-                <td><a href="${page.archiveFileUri}" download="${page.fileName}">${page.fileName}</a></td>
+                <td><a href="${page.archiveFileUri}" download="${page.downloadName}"
+                       data-sly-unwrap="${!page.fileName}">${page.fileName || 'upload a site content ZIP file: page properties - Microsite tab'}</a>
+                </td>
             </tr>
             <!--/* tr>
                 <td>file size</td>

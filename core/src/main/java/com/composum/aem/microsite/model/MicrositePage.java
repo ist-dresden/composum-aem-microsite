@@ -56,7 +56,11 @@ public class MicrositePage {
     }
 
     public String getFileName() {
-        String fileName = pageProperties.get("fileName", "");
+        return pageProperties.get("fileName", "");
+    }
+
+    public String getDownloadName() {
+        String fileName = getFileName();
         return StringUtils.isNotBlank(fileName) ? fileName : "archiveFile.zip";
     }
 

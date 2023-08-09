@@ -10,6 +10,9 @@ public interface MicrositeConstants {
     String SOURCE_ENCODING = "UTF-8";
     String INDEX_FILE = "index.html";
 
+    String PLACEHOLDER_PAGE = "page";
+    String PLACEHOLDER_PATH = "path";
+
     // microsite state property names
 
     String PN_INDEX_PATH = "indexPath";
