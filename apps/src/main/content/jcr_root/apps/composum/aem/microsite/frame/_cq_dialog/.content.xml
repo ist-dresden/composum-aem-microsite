@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0"
+        xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+        xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+        xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Microsite"
+        sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container"
+            granite:class="cpm-microsite-frame__editorr">
+        <items
+                jcr:primaryType="nt:unstructured">
+            <columns
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                    margin="{Boolean}true">
+                <items
+                        jcr:primaryType="nt:unstructured">
+                    <column
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items
+                                jcr:primaryType="nt:unstructured">
+                            <micrositePath
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                    fieldDescription="Path of the Microsite to embed."
+                                    fieldLabel="Microsite Path"
+                                    name="./micrositePath"
+                                    required="{Boolean}true"
+                                    rootPath="/content"/>
+                            <indexPath
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Path of the entry point (path to 'index.html')"
+                                    fieldLabel="Index Path"
+                                    name="./indexPath"/>
+                            <linkText
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="If a label for a link is specified the microsite is opened in a separate window instead of an iFrame."
+                                    fieldLabel="Link Text"
+                                    name="./linkText"/>
+                            <linkTitle
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="The optional title (tooltip) of the link to the microsite."
+                                    fieldLabel="Link Title"
+                                    name="./linkTitle"/>
+                            <frameHeight
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="the designated height of the embedded frame"
+                                    fieldLabel="Frame Height"
+                                    name="./frameHeight"/>
+                            <frameSandbox
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                    fieldDescription="select the fram sandbox options"
+                                    fieldLabel="Frame Sandbox">
+                                <field
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                        deleteHint="{Boolean}false"
+                                        emptyText="Select sandbox options..."
+                                        fieldLabel="Option"
+                                        multiple="{Boolean}false"
+                                        name="./frameSandbox">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <allow-presentation
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-presentation"
+                                                value="allow-presentation"/>
+                                        <allow-scripts
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-scripts"
+                                                value="allow-scripts"/>
+                                        <allow-downloads
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-downloads"
+                                                value="allow-downloads"/>
+                                        <allow-modals
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-modals"
+                                                value="allow-modals"/>
+                                        <allow-forms
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-forms"
+                                                value="allow-forms"/>
+                                        <allow-popups
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-popups"
+                                                value="allow-popups"/>
+                                        <allow-popups-to-escape-sandbox
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-popups-to-escape-sandbox"
+                                                value="allow-popups-to-escape-sandbox"/>
+                                        <allow-same-origin
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-same-origin"
+                                                value="allow-same-origin"/>
+                                        <allow-orientation-lock
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-orientation-lock"
+                                                value="allow-orientation-lock"/>
+                                        <allow-pointer-lock
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-pointer-lock"
+                                                value="allow-pointer-lock"/>
+                                        <allow-top-navigation
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-top-navigation"
+                                                value="allow-top-navigation"/>
+                                        <allow-top-navigation-by-user-activation
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-top-navigation-by-user-activation"
+                                                value="allow-top-navigation-by-user-activation"/>
+                                        <allow-top-navigation-to-custom-protocols
+                                                jcr:primaryType="nt:unstructured"
+                                                text="allow-top-navigation-to-custom-protocols"
+                                                value="allow-top-navigation-to-custom-protocols"/>
+                                    </items>
+                                </field>
+                            </frameSandbox>
+                        </items>
+                    </column>
+                </items>
+            </columns>
+        </items>
+    </content>
+</jcr:root>
