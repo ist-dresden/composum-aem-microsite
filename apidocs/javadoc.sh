@@ -1,1 +1,1 @@
-/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/11.0.19-7/x64/bin/javadoc @options @packages
+/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/11.0.20-8/x64/bin/javadoc @options @packages
