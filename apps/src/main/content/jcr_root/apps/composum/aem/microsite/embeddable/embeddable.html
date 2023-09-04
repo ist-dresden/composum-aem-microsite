@@ -1,7 +1,7 @@
 <sly data-sly-use.model="com.composum.aem.microsite.model.MicrositeFrame">
     <div class="composum-aem-microsite-frame">
-        <iframe class="composum-aem-microsite-frame_frame"
-                src="${model.micrositeSrc}" width="100%" height="${model.frameHeight}"
-                data-sly-attribute.sandbox="${model.frameSandbox}" frameborder="none"></iframe>
+        <iframe class="composum-aem-microsite-frame_frame" src="${model.micrositeSrc}"
+                data-sly-attribute.width="${model.frameWidth}" data-sly-attribute.height="${model.frameHeight}"
+                data-sly-attribute.sandbox="${model.frameSandbox}"></iframe>
     </div>
 </sly>

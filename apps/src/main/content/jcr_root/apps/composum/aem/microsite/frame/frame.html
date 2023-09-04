@@ -1,9 +1,4 @@
 <sly data-sly-use.model="com.composum.aem.microsite.model.MicrositeFrame">
-    <sly data-sly-test="${model.mode == 'link'}">
-        <div class="composum-aem-microsite-link">
-            <a class="composum-aem-microsite-link_link" href="${model.micrositeSrc}" title="${model.linkTitle}"
-               target="=_blank"><span class="composum-aem-microsite-link_link-text">${model.linkText}</span></a>
-        </div>
-    </sly>
+    <sly data-sly-test="${model.mode == 'link'}" data-sly-include="${'link.html'}"></sly>
     <sly data-sly-test="${model.mode == 'iframe'}" data-sly-include="${'embeddable.html'}"></sly>
 </sly>

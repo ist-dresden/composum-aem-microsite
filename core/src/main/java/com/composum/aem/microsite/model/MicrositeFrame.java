@@ -23,7 +23,7 @@ import static com.composum.aem.microsite.MicrositeConstants.PN_INDEX_PATH;
 import static com.day.cq.commons.jcr.JcrConstants.JCR_CONTENT;
 
 @SuppressWarnings("unused")
-@Model(adaptables = SlingHttpServletRequest.class)
+@Model(adaptables = SlingHttpServletRequest.class, cache = true)
 public class MicrositeFrame {
 
     enum Mode {iframe, link}
@@ -45,6 +45,12 @@ public class MicrositeFrame {
 
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
     protected String linkTitle;
+
+    @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
+    protected String linkTarget;
+
+    @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
+    protected String frameWidth;
 
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
     protected String frameHeight;
@@ -125,8 +131,16 @@ public class MicrositeFrame {
         return linkTitle;
     }
 
+    public @Nullable String getLinkTarget() {
+        return StringUtils.defaultIfBlank(linkTarget, "_blank");
+    }
+
+    public @NotNull String getFrameWidth() {
+        return StringUtils.defaultIfBlank(frameWidth, "");
+    }
+
     public @NotNull String getFrameHeight() {
-        return StringUtils.defaultIfBlank(frameHeight, "400");
+        return StringUtils.defaultIfBlank(frameHeight, "");
     }
 
     public @NotNull String getFrameSandbox() {
