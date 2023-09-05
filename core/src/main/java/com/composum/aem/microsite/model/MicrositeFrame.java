@@ -23,7 +23,7 @@ import static com.composum.aem.microsite.MicrositeConstants.PN_INDEX_PATH;
 import static com.day.cq.commons.jcr.JcrConstants.JCR_CONTENT;
 
 @SuppressWarnings("unused")
-@Model(adaptables = SlingHttpServletRequest.class, cache = true)
+@Model(adaptables = SlingHttpServletRequest.class)
 public class MicrositeFrame {
 
     enum Mode {iframe, link}
