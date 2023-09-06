@@ -12,7 +12,7 @@
 
     <properties>
         <aem.sdk.api>2023.2.11289.20230224T170559Z-230100</aem.sdk.api>
-        <package.group>com.composum.aem</package.group>
+        <package.group>com/composum/aem</package.group>
         <bundle.category>com.composum.aem</bundle.category>
         <release.repository.id>ossrh</release.repository.id>
         <release.repository.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</release.repository.url>

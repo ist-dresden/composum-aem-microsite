@@ -53,7 +53,7 @@ public class MicrositeFrame {
     protected String frameWidth;
 
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
-    protected String frameHeight;
+    protected String frameRatio;
 
     @ValueMapValue
     @Default(values = {})
@@ -139,8 +139,8 @@ public class MicrositeFrame {
         return StringUtils.defaultIfBlank(frameWidth, "");
     }
 
-    public @NotNull String getFrameHeight() {
-        return StringUtils.defaultIfBlank(frameHeight, "");
+    public @NotNull String getFrameStyle() {
+        return StringUtils.isNotBlank(frameRatio) ? "aspect-ratio: " + frameRatio + ";" : "";
     }
 
     public @NotNull String getFrameSandbox() {
