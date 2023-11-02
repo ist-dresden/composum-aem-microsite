@@ -82,7 +82,7 @@ public class MicrositeImportServiceImpl implements MicrositeImportService, Micro
                 description = "the list of path and filename patterns for all allowed files (whitelist)"
         )
         String[] whitelist() default {
-                "^(.*/)?[^/]+\\.(html|jsp|s?css|less|js|json|map)$",
+                "^(.*/)?[^/]+\\.(html|jsp|s?css|less|js|json|map|wasm|data)$",
                 "^(.*/)?[^/]+\\.(png|jpg|jpeg|svg|gif|ico)$",
                 "^(.*/)?[^/]+\\.(eot|otf|ttf|woff|woff2)$",
                 "^(.*/)?[^/]+\\.(mp4|m4v|mp3|ogg|acc|wav)$",
