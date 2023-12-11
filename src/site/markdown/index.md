@@ -2,9 +2,6 @@
 
 A page implementation to upload and embed a simple site as AEM content page.
 
-- [Releases](https://github.com/ist-dresden/composum-aem-microsite/releases)
-- [Documentation site for Composum Dashboard](https://ist-dresden.github.io/composum-aem-microsite/)
-
 ### What is the use case?
 
 Sometimes you may want to embed a simple game, tool or similar content into your AEM site.
@@ -36,6 +33,14 @@ bootstrap code, you can use some simple patterns in the code to support this mic
 
   are interpreted as relative paths to be converted, and these are then changed during extraction.
 
+## Installation
+
+Install the package 
+[Composum AEM - Microsite](https://central.sonatype.com/artifact/com.composum.aem/composum-aem-microsite).
+
+To enable creating microsite pages, you might have to add page template 
+`/conf/composum/settings/wcm/templates/microsite-template` to `cq:allowedTemplates` of your site.
+
 ## Try it!
 
 For testing, you can use a framework or a style sheet that you can download for free, for example:
@@ -48,3 +53,7 @@ Create a 'Microsite Page' for testing and upload such an example by opening the 
 in the page properties and upload it in the upload field of this tab, save the properties and that's it.
 The embedded page should show up as expected on the AEM publishers and
 in preview mode 'View as Published' on the author.
+
+If you haven't added the template to `cq:allowedTemplates` of your site, you could also create a page
+an empty page with `sling:resourceType="composum/aem/microsite"` and
+`cq:template="/conf/composum/settings/wcm/templates/microsite-template"` by other means.

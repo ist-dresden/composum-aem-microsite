@@ -2,7 +2,8 @@
 <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
           jcr:description="a template to add a microsite uploaded as ZIP file as a content page"
           jcr:primaryType="cq:Template"
-          allowedChildren="">
+          allowedChildren=""
+          allowedPaths="^/content(/.*)?$">
     <jcr:content
             jcr:primaryType="cq:PageContent"
             jcr:title="Microsite"
