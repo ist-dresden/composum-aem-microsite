@@ -2,6 +2,9 @@
 
 A page implementation to upload and embed a simple site as AEM content page.
 
+- [Releases](https://github.com/ist-dresden/composum-aem-microsite/releases)
+- [Documentation site for Composum Dashboard](https://ist-dresden.github.io/composum-aem-microsite/)
+
 ### What is the use case?
 
 Sometimes you may want to embed a simple game, tool or similar content into your AEM site.
